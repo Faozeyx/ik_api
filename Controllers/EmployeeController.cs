@@ -42,7 +42,6 @@ namespace IKAPI.Controllers
 
             _context.Employees.Add(personelim);
             _context.SaveChanges();
-
             return Ok();
         }
 
@@ -74,7 +73,6 @@ namespace IKAPI.Controllers
                 personel.CompanyID = Guid.Parse(request.CompanyID); 
 
             _context.SaveChanges();
-
             return Ok();
         }
 
