@@ -31,7 +31,6 @@ namespace IKAPI.Controllers
 
             _context.Companies.Add(yenifirmam);
             _context.SaveChanges();
-
          
             return Ok();
         }
@@ -53,9 +52,7 @@ namespace IKAPI.Controllers
 
         [HttpDelete("[action]/{Id}")]
         public async Task<IActionResult> DeleteCompany([FromRoute] string Id)
-
         {
-
             Company? arananfirma = _context.Companies
                 .Where(firma => firma.Id == Guid.Parse(Id)).FirstOrDefault();
 
@@ -64,6 +61,7 @@ namespace IKAPI.Controllers
 
             _context.Companies.Remove(arananfirma);
             _context.SaveChanges();
+
             return Ok();
         }
     }
