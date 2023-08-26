@@ -1,9 +1,7 @@
 ﻿using IKAPI.Contexts;
 using IKAPI.Dtos;
 using IKAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Cache;
 
 namespace IKAPI.Controllers
 {
@@ -11,7 +9,6 @@ namespace IKAPI.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-
         private readonly Databasecontext _context;
 
         public EmployeeController(Databasecontext context)
@@ -28,7 +25,6 @@ namespace IKAPI.Controllers
 
 
         [HttpPost("[action]")]
-
         public async Task<IActionResult> CreateEmployee([FromBody] DtoCreateEmployee request)
         {
             Employee personelim = new()
@@ -48,11 +44,8 @@ namespace IKAPI.Controllers
         [HttpPut("[action]")]
         public async Task<IActionResult> UpdateEmployee([FromBody] DtoUpdateEmployee request)
         {
-
             Employee personel = _context.Employees.
             Where(personel => personel.Id == Guid.Parse(request.Id)).FirstOrDefault();
-
-            
 
             if (personel == null) return NotFound();
 
@@ -65,7 +58,6 @@ namespace IKAPI.Controllers
             if (request.FirstStartDate != null)
                 personel.FirstStartDate = request.FirstStartDate ?? DateTime.UtcNow;
 
-            
             if (request.Age != null)
                 personel.Age = request.Age ?? 0; 
 
@@ -79,9 +71,7 @@ namespace IKAPI.Controllers
 
         [HttpDelete("[action]/{Id}")]
         public async Task<IActionResult> DeleteEmployees([FromRoute] string Id)
-
         {
-
             Employee personel = _context.Employees
                 .Where(personel => personel.Id == Guid.Parse(Id)).FirstOrDefault();
 
@@ -92,6 +82,5 @@ namespace IKAPI.Controllers
             _context.SaveChanges();
             return Ok();
         }
-
     }
 }
